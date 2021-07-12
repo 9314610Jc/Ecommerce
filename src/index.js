@@ -7,15 +7,25 @@ import { FilterProvider } from './context/filter_context'
 import { CartProvider } from './context/cart_context'
 import { UserProvider } from './context/user_context'
 import { Auth0Provider } from '@auth0/auth0-react'
-
+// domain: dev-gsyqrb0c.us.auth0.com
+// client id: I4TXMw7gadlwyAHAfd8BtWWeuvWCZwpA
 ReactDOM.render(
-  <ProductsProvider>
-    <FilterProvider>
-      <CartProvider>
-        <App />
-      </CartProvider>
-    </FilterProvider>
-  </ProductsProvider>,
+  <Auth0Provider
+    domain="dev-65fip-7f.us.auth0.com"
+    clientId="3ArwTEieNH3jrKWWnSvbwB6YUQyglrxu"
+    redirectUri={window.location.origin}
+    cacheLocation="localstorage"
+  >
+    <UserProvider>
+      <ProductsProvider>
+        <FilterProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </FilterProvider>
+      </ProductsProvider>
+    </UserProvider>
+  </Auth0Provider>,
 
   document.getElementById('root')
 )

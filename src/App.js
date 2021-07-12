@@ -36,10 +36,10 @@ function App() {
           <Cart />{' '}
         </Route>
 
-        <Route exact path="/checkout">
+        <PrivateRoute exact path="/checkout">
           {' '}
           <Checkout />{' '}
-        </Route>
+        </PrivateRoute>
         <Route exact path="/products/:id" children={<SingleProduct />} />
         <Route exact path="*">
           {' '}
