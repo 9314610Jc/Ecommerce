@@ -16,48 +16,67 @@ import { Link } from 'react-router-dom'
 
 const SingleProductPage = () => {
   const { id } = useParams()
-  const {single_product_loading:loading,single_product_error:error, single_product:product,getSingleProduct} = useProductsContext();
-  useEffect(()=>{
+  const history = useHistory()
+  const {
+    single_product_loading: loading,
+    single_product_error: error,
+    single_product: product,
+    getSingleProduct,
+  } = useProductsContext()
+  useEffect(() => {
     getSingleProduct(`${url}${id}`)
   }, [id])
-  if(loading){
-    <Loading/>
+
+  if (loading) {
+    ;<Loading />
   }
-  if(error){
-    <Error/>
+  if (error) {
+    ;<Error />
   }
-  const {name,price, description, stock,reviews, stars,company,images,id:sku} = product
-  return <Wrapper>
-    <PageHero title={name} product/>
-    <div className="section section-center page">
-      <Link to='/products' className='btn'>
-        Back to Products
-      </Link>
-      <div className="product-center">
-        <ProductImages images={images}/> 
-        <section className="content">
-          <h2>{name}</h2>
-          < Stars stars={stars} reviews={reviews}/>
-          <h5 className='price'>{formatPrice(price)}</h5>
-          <p className='desc'>{description}</p>
-          <p className='info'>
-            <span>Availablility: </span>
-            {stock > 0? 'In Stock': 'Out of Stock'}
-          </p>
-          <p className='info'>
-            <span>SKU: </span>
-            {sku}
-          </p>
-          <p className='info'>
-            <span>Brand: </span>
-            {company}
-          </p>
-          <hr />
-          {stock > 0 && <AddToCart product={product}/>}
-        </section>
+  const {
+    name,
+    price,
+    description,
+    stock,
+    reviews,
+    stars,
+    company,
+    images,
+    id: sku,
+  } = product
+  return (
+    <Wrapper>
+      <PageHero title={name} product />
+      <div className="section section-center page">
+        <Link to="/products" className="btn">
+          Back to Products
+        </Link>
+        <div className="product-center">
+          <ProductImages images={images} />
+          <section className="content">
+            <h2>{name}</h2>
+            <Stars stars={stars} reviews={reviews} />
+            <h5 className="price">{formatPrice(price)}</h5>
+            <p className="desc">{description}</p>
+            <p className="info">
+              <span>Availablility: </span>
+              {stock > 0 ? 'In Stock' : 'Out of Stock'}
+            </p>
+            <p className="info">
+              <span>SKU: </span>
+              {sku}
+            </p>
+            <p className="info">
+              <span>Brand: </span>
+              {company}
+            </p>
+            <hr />
+            {stock > 0 && <AddToCart product={product} />}
+          </section>
+        </div>
       </div>
-    </div>
-  </Wrapper>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.main`
